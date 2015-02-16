@@ -3,6 +3,7 @@ package com.boltcave.artefactory;
 import android.content.Context;
 import android.graphics.*;
 import android.graphics.Shader.TileMode;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -33,9 +34,13 @@ public class BitmapView extends SurfaceView implements Runnable
 		paint.setDither(false);
 		
 		//mbitmap = Bitmap.createBitmap(100,100,Bitmap.Config.ARGB_8888);
-		mbitmap = BitmapFactory.decodeResource(getResources(),R.drawable.som_gnome);
+		BitmapFactory.Options opts = new BitmapFactory.Options();
+		opts.inMutable = true;
+		mbitmap = BitmapFactory.decodeResource(getResources(),R.drawable.som_gnome, opts);
+		
 		Bitmap fillMap = BitmapFactory.decodeResource(getResources(), R.drawable.pattern_fill);
 		Shader fillShader = new BitmapShader(fillMap, TileMode.REPEAT, TileMode.REPEAT);
+		
 		fillPaint = new Paint();
 		fillPaint.setShader(fillShader);
 		
@@ -46,6 +51,33 @@ public class BitmapView extends SurfaceView implements Runnable
 		mrect = new Rect(0,0,mbitmap.getWidth(),mbitmap.getHeight());
 		mscreen = new Rect();
 		offset_zoom = 10f;
+	}
+	
+	public BitmapView(Context ctx, AttributeSet attrs)
+	{
+		super(ctx);
+		context = ctx;
+		paint = new Paint();
+		paint.setDither(false);
+		
+		BitmapFactory.Options opts = new BitmapFactory.Options();
+		opts.inMutable = true;
+		mbitmap = BitmapFactory.decodeResource(getResources(),R.drawable.som_gnome, opts);
+		
+		Bitmap fillMap = BitmapFactory.decodeResource(getResources(), R.drawable.pattern_fill);
+		Shader fillShader = new BitmapShader(fillMap, TileMode.REPEAT, TileMode.REPEAT);
+		
+		fillPaint = new Paint();
+		fillPaint.setShader(fillShader);
+		
+		holder = getHolder();
+		
+		//tool = new PanZoomTool(this);
+		tool = new PixelTool(this);
+		mrect = new Rect(0,0,mbitmap.getWidth(),mbitmap.getHeight());
+		mscreen = new Rect();
+		offset_zoom = 10f;
+		
 	}
 	
 	public void onResumeBitmapView(){

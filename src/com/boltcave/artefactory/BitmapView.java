@@ -29,6 +29,24 @@ public class BitmapView extends SurfaceView implements Runnable
 	public BitmapView(Context ctx)
 	{
 		super(ctx);
+		init(ctx);
+	}
+	
+	public BitmapView(Context ctx, AttributeSet attrs)
+	{
+		super(ctx, attrs);
+		init(ctx);
+		
+	}
+	
+	public BitmapView(Context ctx, AttributeSet attrs, int defStyle)
+	{
+		super(ctx, attrs, defStyle);
+		init(ctx);
+	}
+	
+	private void init(Context ctx)
+	{
 		context = ctx;
 		paint = new Paint();
 		paint.setDither(false);
@@ -51,33 +69,6 @@ public class BitmapView extends SurfaceView implements Runnable
 		mrect = new Rect(0,0,mbitmap.getWidth(),mbitmap.getHeight());
 		mscreen = new Rect();
 		offset_zoom = 10f;
-	}
-	
-	public BitmapView(Context ctx, AttributeSet attrs)
-	{
-		super(ctx);
-		context = ctx;
-		paint = new Paint();
-		paint.setDither(false);
-		
-		BitmapFactory.Options opts = new BitmapFactory.Options();
-		opts.inMutable = true;
-		mbitmap = BitmapFactory.decodeResource(getResources(),R.drawable.som_gnome, opts);
-		
-		Bitmap fillMap = BitmapFactory.decodeResource(getResources(), R.drawable.pattern_fill);
-		Shader fillShader = new BitmapShader(fillMap, TileMode.REPEAT, TileMode.REPEAT);
-		
-		fillPaint = new Paint();
-		fillPaint.setShader(fillShader);
-		
-		holder = getHolder();
-		
-		//tool = new PanZoomTool(this);
-		tool = new PixelTool(this);
-		mrect = new Rect(0,0,mbitmap.getWidth(),mbitmap.getHeight());
-		mscreen = new Rect();
-		offset_zoom = 10f;
-		
 	}
 	
 	public void onResumeBitmapView(){

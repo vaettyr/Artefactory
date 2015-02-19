@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
 
     <com.boltcave.artefactory.ToolPalette
         android:id="@+id/toolPalette1"
@@ -21,6 +21,6 @@
     <com.boltcave.artefactory.BitmapView
         android:id="@+id/bitmapView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" /> 
 
 </LinearLayout>

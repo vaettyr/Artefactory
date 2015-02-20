@@ -151,4 +151,8 @@ public class BitmapView extends SurfaceView implements Runnable
 		return true; //processed
 	}
 
+	public void setTool(SurfaceTool tl)
+	{
+		this.tool = tl;
+	}
 }

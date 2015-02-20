@@ -30,7 +30,10 @@ public class PixelTool extends SurfaceTool
 			cx >= 0 && cx <= view.mrect.width() &&
 			cy >= 0 && cy <= view.mrect.height())
 			{
-				canvas.drawLine(cx, cy, px, py, paint);
+				if(cx == px && cy == py)
+					view.mbitmap.setPixel(px, py, Color.RED);
+				else
+					canvas.drawLine(cx, cy, px, py, paint);
 			}
 						
 	}

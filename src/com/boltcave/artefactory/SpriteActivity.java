@@ -4,6 +4,7 @@ import android.app.*;
 import android.os.*;
 import android.view.*;
 import android.widget.*;
+import android.widget.RadioGroup.*;
 import android.content.*;
 import android.graphics.*;
 import android.widget.AbsListView.*;
@@ -14,6 +15,7 @@ import com.boltcave.artefactory.R;
 public class SpriteActivity extends Activity
 {		
 	BitmapView bmap;
+	RadioGroup toolpalette;
 
     /** Called when the activity is first created. */
     @Override
@@ -27,6 +29,22 @@ public class SpriteActivity extends Activity
         setContentView(R.layout.main);
         
         bmap = (BitmapView)findViewById(R.id.bitmapView1);
+        toolpalette = (RadioGroup)findViewById(R.id.toolPalette);
+        toolpalette.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+			@Override
+			public void onCheckedChanged(RadioGroup palette, int btnId) {
+				// TODO Auto-generated method stub
+				switch(btnId)
+				{
+					case R.id.btnDrawPixel:
+						bmap.setTool(new PixelTool(bmap));
+						break;
+					case R.id.btnPanZoom:
+						bmap.setTool(new PanZoomTool(bmap));
+						break;
+				}
+			}	
+        });
     }
 
     @Override

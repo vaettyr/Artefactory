@@ -5,18 +5,25 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <com.boltcave.artefactory.ToolPalette
-        android:id="@+id/toolPalette1"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp" >
+    <RadioGroup
+        android:id="@+id/toolPalette"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-        <com.boltcave.artefactory.ToolButton
-            android:id="@+id/toolButton1"
+        <RadioButton
+            android:id="@+id/btnPanZoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ToolButton" />
+            android:checked="true"
+            android:text="Move mode" />
 
-    </com.boltcave.artefactory.ToolPalette>
+        <RadioButton
+            android:id="@+id/btnDrawPixel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Draw mode" />
+    </RadioGroup>
 
     <com.boltcave.artefactory.BitmapView
         android:id="@+id/bitmapView1"

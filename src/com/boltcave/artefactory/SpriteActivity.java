@@ -16,6 +16,7 @@ public class SpriteActivity extends Activity
 {		
 	BitmapView bmap;
 	RadioGroup toolpalette;
+	BitmapUndoStack undostack;
 
     /** Called when the activity is first created. */
     @Override
@@ -23,7 +24,9 @@ public class SpriteActivity extends Activity
 	{
         super.onCreate(savedInstanceState);
         
-        //bmap = new BitmapView(this);
+		//undostack = new BitmapUndoStack(this, savedInstanceState);
+      
+		//bmap = new BitmapView(this);
 		//bmap.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		//this.setContentView(bmap);
         setContentView(R.layout.main);
@@ -68,6 +71,13 @@ public class SpriteActivity extends Activity
 		// TODO: Implement this method
 		super.onPause();
 		bmap.onPauseBitmapView();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		//outState = undostack.saveInstanceState(outState);
 	}
 	
 }

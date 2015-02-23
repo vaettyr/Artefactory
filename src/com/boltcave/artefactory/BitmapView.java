@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import com.boltcave.artefactory.R;
+import android.os.*;
 
 public class BitmapView extends SurfaceView implements Runnable
 {
@@ -22,7 +23,7 @@ public class BitmapView extends SurfaceView implements Runnable
 	private Thread mthread;
 	private SurfaceHolder holder;
 	private SurfaceTool tool;
-	volatile boolean running = false;
+	volatile boolean running = false, set_offset = false;
 	
 	volatile float offset_x, offset_y, offset_zoom;
 	
@@ -96,8 +97,12 @@ public class BitmapView extends SurfaceView implements Runnable
 	{
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		getDrawingRect(mscreen);
-		offset_x = mscreen.centerX();
-		offset_y = mscreen.centerY();
+		if(!set_offset)
+		{
+			offset_x = mscreen.centerX();
+			offset_y = mscreen.centerY();
+			set_offset = true;
+		}
 	}
 	
 	@Override
@@ -126,7 +131,37 @@ public class BitmapView extends SurfaceView implements Runnable
 						(int)(offset_x + dimx),
 						(int)(offset_y+ dimy));
 	}
+
+	@Override
+	protected Parcelable onSaveInstanceState()
+	{
+
+		Bundle bundle = new Bundle();
+		bundle.putParcelable("instanceState", super.onSaveInstanceState());
+		bundle.putFloat("offset_x", this.offset_x);
+		bundle.putFloat("offset_y", this.offset_y);
+		bundle.putBoolean("set_offset", this.set_offset);
+		bundle.putFloat("offset_zoom", this.offset_zoom);
+		// ... save everything
+		return bundle;
+	}
+
+	@Override
+	public void onRestoreInstanceState(Parcelable state) {
+
+		if (state instanceof Bundle) {
+			Bundle bundle = (Bundle) state;
+			this.offset_x = bundle.getFloat("offset_x");
+			this.offset_y = bundle.getFloat("offset_y");
+			this.set_offset = bundle.getBoolean("set_offset");
+			this.offset_zoom = bundle.getFloat("offset_zoom");
+			// ... load everything
+			state = bundle.getParcelable("instanceState");
+		}
+		super.onRestoreInstanceState(state);
+	}
 	
+ 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		int action = event.getAction();

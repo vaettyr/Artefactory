@@ -24,6 +24,12 @@
             android:text="Draw mode" />
     </RadioGroup>
 
+    <fragment
+        android:id="@+id/colorpalette"
+        android:name="com.boltcave.artefactory.ColorPalette"
+        android:layout_width="200dp"
+        android:layout_height="match_parent" />
+
     <com.boltcave.artefactory.BitmapView
         android:id="@+id/bitmapView1"
         android:layout_width="wrap_content"

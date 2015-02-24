@@ -27,7 +27,9 @@ public class BitmapView extends SurfaceView implements Runnable
 	
 	volatile float offset_x, offset_y, offset_zoom;
 	
-	public BitmapView(Context ctx)
+	public int currentColor;
+	
+ 	public BitmapView(Context ctx)
 	{
 		super(ctx);
 		init(ctx);
@@ -70,6 +72,7 @@ public class BitmapView extends SurfaceView implements Runnable
 		mrect = new Rect(0,0,mbitmap.getWidth(),mbitmap.getHeight());
 		mscreen = new Rect();
 		offset_zoom = 10f;
+		currentColor = Color.RED;
 	}
 	
 	public void onResumeBitmapView(){
@@ -189,5 +192,11 @@ public class BitmapView extends SurfaceView implements Runnable
 	public void setTool(SurfaceTool tl)
 	{
 		this.tool = tl;
+	}
+	
+	public void setColor(int color)
+	{
+		currentColor = color;
+		tool.handleColorChanged(currentColor);
 	}
 }

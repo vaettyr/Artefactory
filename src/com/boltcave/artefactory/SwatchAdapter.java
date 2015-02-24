@@ -6,98 +6,42 @@ import android.graphics.*;
 import android.graphics.drawable.*;
 import android.database.*;
 
-public class SwatchAdapter implements ListAdapter
-{
-
-	@Override
-	public void registerDataSetObserver(DataSetObserver p1)
-	{
-		// TODO: Implement this method
-	}
-
-	@Override
-	public void unregisterDataSetObserver(DataSetObserver p1)
-	{
-		// TODO: Implement this method
-	}
-
-	@Override
-	public int getCount()
-	{
-		// TODO: Implement this method
-		return 0;
-	}
-
-	@Override
-	public Object getItem(int p1)
-	{
-		// TODO: Implement this method
-		return null;
-	}
-
-	@Override
-	public long getItemId(int p1)
-	{
-		// TODO: Implement this method
-		return 0;
-	}
-
-	@Override
-	public boolean hasStableIds()
-	{
-		// TODO: Implement this method
-		return false;
-	}
-
-	@Override
-	public View getView(int p1, View p2, ViewGroup p3)
-	{
-		// TODO: Implement this method
-		return null;
-	}
-
-	@Override
-	public int getItemViewType(int p1)
-	{
-		// TODO: Implement this method
-		return 0;
-	}
-
-	@Override
-	public int getViewTypeCount()
-	{
-		// TODO: Implement this method
-		return 0;
-	}
-
-	@Override
-	public boolean isEmpty()
-	{
-		// TODO: Implement this method
-		return false;
-	}
-
-	@Override
-	public boolean areAllItemsEnabled()
-	{
-		// TODO: Implement this method
-		return false;
-	}
-
-	@Override
-	public boolean isEnabled(int p1)
-	{
-		// TODO: Implement this method
-		return false;
-	}
-
+public class SwatchAdapter extends BaseAdapter {
     private Context mContext;
 
     public SwatchAdapter(Context c) {
         mContext = c;
     }
 
-    
+    public int getCount() {
+        return mColors.length;
+    }
+
+    public Object getItem(int position) {
+        return mColors[position];
+    }
+
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    // create a new ImageView for each item referenced by the Adapter
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ImageView imageView;
+        if (convertView == null) {  // if it's not recycled, initialize some attributes
+            imageView = new ImageView(mContext);
+            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(8, 8, 8, 8);
+        } else {
+            imageView = (ImageView) convertView;
+        }
+
+        ColorDrawable colorswatch = new ColorDrawable();
+        colorswatch.setColor(mColors[position]);
+        imageView.setImageDrawable(colorswatch);
+        return imageView;
+    }
 
     // references to our images
     private Integer[] mColors = {

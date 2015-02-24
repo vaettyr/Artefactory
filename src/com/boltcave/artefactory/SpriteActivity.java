@@ -13,6 +13,7 @@ import javax.security.auth.*;
 import com.boltcave.artefactory.R;
 
 public class SpriteActivity extends Activity
+	implements ColorPalette.OnColorSelectedListener
 {		
 	BitmapView bmap;
 	RadioGroup toolpalette;
@@ -61,13 +62,29 @@ public class SpriteActivity extends Activity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		Intent paletteIntent = new Intent(this, ColorPalette.class);
-		startActivity(paletteIntent);
+		FragmentManager fm = getFragmentManager();
+		Fragment paletteFrag = fm.findFragmentById(R.id.colorpalette);
+		if(paletteFrag != null)
+		{
+			if(paletteFrag.isVisible())
+			{
+				fm.beginTransaction()
+		          .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+		          .hide(paletteFrag)
+		          .commit();
+			}
+			else
+			{
+				fm.beginTransaction()
+		          .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+		          .show(paletteFrag)
+		          .commit();
+			}
+		}
+		
 		return true;
 	}
     
-	
-	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -90,4 +107,8 @@ public class SpriteActivity extends Activity
 		//outState = undostack.saveInstanceState(outState);
 	}
 	
+	public void onColorSelected(int color)
+	{
+		bmap.setColor(color);
+	}
 }

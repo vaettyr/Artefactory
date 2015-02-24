@@ -84,4 +84,7 @@ public  class SurfaceTool implements SurfaceTouchHandler
 		touchCount = 0;
 		touch = false;
 	}
+	
+	@Override
+	public void handleColorChanged(int color){}
 }

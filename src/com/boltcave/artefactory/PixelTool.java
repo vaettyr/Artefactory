@@ -6,12 +6,13 @@ public class PixelTool extends SurfaceTool
 {
 	private Canvas canvas;
 	private Paint paint;
+	
 	public PixelTool(BitmapView view)
 	{
 		super(view);
 		canvas = new Canvas(view.mbitmap);
 		paint = new Paint();
-		paint.setColor(Color.RED);
+		paint.setColor(view.currentColor);
 		//paint.setAntiAlias(true);
 		//paint.setStrokeWidth(2.0f);
 	}
@@ -31,7 +32,7 @@ public class PixelTool extends SurfaceTool
 			cy >= 0 && cy <= view.mrect.height())
 			{
 				if(cx == px && cy == py)
-					view.mbitmap.setPixel(px, py, Color.RED);
+					view.mbitmap.setPixel(px, py, view.currentColor);
 				else
 					canvas.drawLine(cx, cy, px, py, paint);
 			}
@@ -55,5 +56,9 @@ public class PixelTool extends SurfaceTool
 		setPixel();
 	}
 	
-
+	@Override
+	public void handleColorChanged(int color)
+	{
+		paint.setColor(color);
+	}
 }

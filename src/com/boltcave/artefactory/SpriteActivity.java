@@ -57,7 +57,17 @@ public class SpriteActivity extends Activity
     	inflater.inflate(R.menu.actionbar_menu, menu);
     	return super.onCreateOptionsMenu(menu);
     }
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		Intent paletteIntent = new Intent(this, ColorPalette.class);
+		startActivity(paletteIntent);
+		return true;
+	}
     
+	
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub

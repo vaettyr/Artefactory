@@ -5,27 +5,39 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <RadioGroup
-        android:id="@+id/toolPalette"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content" >
 
-        <RadioButton
-            android:id="@+id/btnPanZoom"
+        <RadioGroup
+            android:id="@+id/toolPalette"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Move mode" />
+            android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/btnDrawPixel"
+            <RadioButton
+                android:id="@+id/btnPanZoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Move mode" />
+
+            <RadioButton
+                android:id="@+id/btnDrawPixel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Draw mode" />
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/imageButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Draw mode" />
-    </RadioGroup>
+            android:src="@drawable/ic_launcher" />
 
-    <com.boltcave.artefactory.BitmapView
+    </LinearLayout>
+
+    <com.boltcave.artefactory.Views.BitmapView
         android:id="@+id/bitmapView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

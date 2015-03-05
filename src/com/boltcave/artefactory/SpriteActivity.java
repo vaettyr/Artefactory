@@ -3,14 +3,25 @@ package com.boltcave.artefactory;
 import android.app.*;
 import android.os.*;
 import android.view.*;
+import android.view.View.OnClickListener;
 import android.widget.*;
 import android.widget.RadioGroup.*;
 import android.content.*;
 import android.graphics.*;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.widget.AbsListView.*;
 import javax.security.auth.*;
 
 import com.boltcave.artefactory.R;
+import com.boltcave.artefactory.Fragments.ColorPalette;
+import com.boltcave.artefactory.Fragments.ColorPalette.OnColorSelectedListener;
+import com.boltcave.artefactory.R.id;
+import com.boltcave.artefactory.R.layout;
+import com.boltcave.artefactory.R.menu;
+import com.boltcave.artefactory.Tools.PanZoomTool;
+import com.boltcave.artefactory.Tools.PixelTool;
+import com.boltcave.artefactory.Views.BitmapView;
 
 public class SpriteActivity extends Activity
 	implements ColorPalette.OnColorSelectedListener
@@ -18,6 +29,7 @@ public class SpriteActivity extends Activity
 	BitmapView bmap;
 	RadioGroup toolpalette;
 	BitmapUndoStack undostack;
+	ImageButton palbtn;
 
     /** Called when the activity is first created. */
     @Override
@@ -26,13 +38,11 @@ public class SpriteActivity extends Activity
         super.onCreate(savedInstanceState);
         
 		//undostack = new BitmapUndoStack(this, savedInstanceState);
-      
-		//bmap = new BitmapView(this);
-		//bmap.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-		//this.setContentView(bmap);
+
         setContentView(R.layout.main);
         
         bmap = (BitmapView)findViewById(R.id.bitmapView1);
+        
         toolpalette = (RadioGroup)findViewById(R.id.toolPalette);
         toolpalette.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 			@Override
@@ -49,7 +59,41 @@ public class SpriteActivity extends Activity
 				}
 			}	
         });
-    }
+    
+        palbtn = (ImageButton)findViewById(R.id.imageButton1);
+        palbtn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {		
+				FragmentManager fm = getFragmentManager();
+				Fragment paletteFrag = fm.findFragmentById(R.id.colorpalette);
+				if(paletteFrag != null)
+				{
+					if(paletteFrag.isVisible())
+					{
+						fm.beginTransaction()
+				          .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+				          .hide(paletteFrag)
+				          .commit();
+					}
+					else
+					{
+						fm.beginTransaction()
+				          .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+				          .show(paletteFrag)
+				          .commit();
+					}
+				}
+			}    	
+        });
+        palbtn.setOnLongClickListener(new View.OnLongClickListener() {	
+			@Override
+			public boolean onLongClick(View v) {				
+				Intent colorIntent = new Intent(v.getContext(), ColorPickerActivity.class);
+				startActivity(colorIntent);
+				return true;
+			}        	
+        });
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -62,32 +106,11 @@ public class SpriteActivity extends Activity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		FragmentManager fm = getFragmentManager();
-		Fragment paletteFrag = fm.findFragmentById(R.id.colorpalette);
-		if(paletteFrag != null)
-		{
-			if(paletteFrag.isVisible())
-			{
-				fm.beginTransaction()
-		          .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-		          .hide(paletteFrag)
-		          .commit();
-			}
-			else
-			{
-				fm.beginTransaction()
-		          .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-		          .show(paletteFrag)
-		          .commit();
-			}
-		}
-		
 		return true;
 	}
     
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		bmap.onResumeBitmapView();
 	}
@@ -95,7 +118,6 @@ public class SpriteActivity extends Activity
 	@Override
 	protected void onPause()
 	{
-		// TODO: Implement this method
 		super.onPause();
 		bmap.onPauseBitmapView();
 	}
@@ -110,5 +132,9 @@ public class SpriteActivity extends Activity
 	public void onColorSelected(int color)
 	{
 		bmap.setColor(color);
+		ColorDrawable colorswatch = new ColorDrawable();
+        colorswatch.setColor(color);
+        palbtn.setImageDrawable(colorswatch);
+		
 	}
 }

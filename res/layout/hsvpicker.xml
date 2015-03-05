@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:boltcave="http://schemas.android.com/apk/res/com.boltcave.artefactory"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.boltcave.artefactory.Views.ColorFieldView
+        android:id="@+id/colorFieldView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        boltcave:cursorid="@drawable/som_gnome"
+        boltcave:cursorsize="50"
+        boltcave:color="#FF08A46B"/>
+
+</LinearLayout>

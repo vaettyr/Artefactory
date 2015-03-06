@@ -1,15 +1,19 @@
 package com.boltcave.artefactory;
 
 import com.boltcave.artefactory.R;
+import com.boltcave.artefactory.Fragments.HSVPicker;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 public class ColorPickerActivity extends Activity
+	implements OnColorChangeListener
 {
 	int mcolor;
 	int tcolor;
@@ -48,5 +52,19 @@ public class ColorPickerActivity extends Activity
         
         startColor.setImageDrawable(mcolordraw);
         currentColor.setImageDrawable(tcolordraw);
+        
+        currentColor.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Intent finalColor = new Intent();
+				//finalColor.set
+			}       	
+        });
+	}
+
+
+	@Override
+	public void OnColorChanged(int color) {
+		tcolordraw.setColor(color);		
 	}
 }

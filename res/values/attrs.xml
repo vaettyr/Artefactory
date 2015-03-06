@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="colorfieldview">
-        <attr name="color" format="color"/>
+        <!-- <attr name="color" format="color"/> -->
         <attr name="cursorid" format="reference"/>
         <attr name="cursorsize" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="axisslider">
+        <attr name="axisstyle" format="enum">
+            <enum name="red" value="0"/>
+            <enum name="green" value="1"/>
+            <enum name="blue" value="2"/>
+            <enum name="alpha" value="3"/>
+            <enum name="hue" value="4"/>         
+        </attr>
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>

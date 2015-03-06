@@ -9,19 +9,25 @@ package com.boltcave.artefactory;
 
 public final class R {
     public static final class attr {
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>red</code></td><td>0</td><td></td></tr>
+<tr><td><code>green</code></td><td>1</td><td></td></tr>
+<tr><td><code>blue</code></td><td>2</td><td></td></tr>
+<tr><td><code>alpha</code></td><td>3</td><td></td></tr>
+<tr><td><code>hue</code></td><td>4</td><td></td></tr>
+</table>
          */
-        public static final int color=0x7f010000;
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+        public static final int axisstyle=0x7f010002;
+        /**  <attr name="color" format="color"/> 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int cursorid=0x7f010001;
+        public static final int cursorid=0x7f010000;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -29,7 +35,18 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cursorsize=0x7f010002;
+        public static final int cursorsize=0x7f010001;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>horizontal</code></td><td>0</td><td></td></tr>
+<tr><td><code>vertical</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int orientation=0x7f010003;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
@@ -38,17 +55,25 @@ containing a value of this type.
         public static final int sv_gradient=0x7f020003;
     }
     public static final class id {
-        public static final int bitmapView1=0x7f070008;
-        public static final int btnDrawPixel=0x7f070006;
-        public static final int btnPanZoom=0x7f070005;
-        public static final int colorFieldView1=0x7f070003;
-        public static final int colorpalette=0x7f070009;
-        public static final int colorpicker_currentcolor=0x7f070002;
-        public static final int colorpicker_startcolor=0x7f070001;
-        public static final int fragment1=0x7f070000;
-        public static final int imageButton1=0x7f070007;
-        public static final int item1=0x7f07000a;
-        public static final int toolPalette=0x7f070004;
+        public static final int alpha=0x7f070000;
+        public static final int axisSlider1=0x7f07000b;
+        public static final int bitmapView1=0x7f070010;
+        public static final int blue=0x7f070001;
+        public static final int btnDrawPixel=0x7f07000e;
+        public static final int btnPanZoom=0x7f07000d;
+        public static final int colorFieldView1=0x7f07000a;
+        public static final int colorpalette=0x7f070011;
+        public static final int colorpicker_currentcolor=0x7f070009;
+        public static final int colorpicker_startcolor=0x7f070008;
+        public static final int fragment1=0x7f070007;
+        public static final int green=0x7f070002;
+        public static final int horizontal=0x7f070005;
+        public static final int hue=0x7f070003;
+        public static final int imageButton1=0x7f07000f;
+        public static final int item1=0x7f070012;
+        public static final int red=0x7f070004;
+        public static final int toolPalette=0x7f07000c;
+        public static final int vertical=0x7f070006;
     }
     public static final class layout {
         public static final int colorpicker=0x7f030000;
@@ -67,48 +92,85 @@ containing a value of this type.
         public static final int AppTheme=0x7f050000;
     }
     public static final class styleable {
+        /** Attributes that can be used with a axisslider.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #axisslider_axisstyle com.boltcave.artefactory:axisstyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #axisslider_orientation com.boltcave.artefactory:orientation}</code></td><td></td></tr>
+           </table>
+           @see #axisslider_axisstyle
+           @see #axisslider_orientation
+         */
+        public static final int[] axisslider = {
+            0x7f010002, 0x7f010003
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.boltcave.artefactory.R.attr#axisstyle}
+          attribute's value can be found in the {@link #axisslider} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>red</code></td><td>0</td><td></td></tr>
+<tr><td><code>green</code></td><td>1</td><td></td></tr>
+<tr><td><code>blue</code></td><td>2</td><td></td></tr>
+<tr><td><code>alpha</code></td><td>3</td><td></td></tr>
+<tr><td><code>hue</code></td><td>4</td><td></td></tr>
+</table>
+          @attr name com.boltcave.artefactory:axisstyle
+        */
+        public static final int axisslider_axisstyle = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.boltcave.artefactory.R.attr#orientation}
+          attribute's value can be found in the {@link #axisslider} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>horizontal</code></td><td>0</td><td></td></tr>
+<tr><td><code>vertical</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name com.boltcave.artefactory:orientation
+        */
+        public static final int axisslider_orientation = 1;
         /** Attributes that can be used with a colorfieldview.
            <p>Includes the following attributes:</p>
            <table>
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #colorfieldview_color com.boltcave.artefactory:color}</code></td><td></td></tr>
-           <tr><td><code>{@link #colorfieldview_cursorid com.boltcave.artefactory:cursorid}</code></td><td></td></tr>
+           <tr><td><code>{@link #colorfieldview_cursorid com.boltcave.artefactory:cursorid}</code></td><td> <attr name="color" format="color"/> </td></tr>
            <tr><td><code>{@link #colorfieldview_cursorsize com.boltcave.artefactory:cursorsize}</code></td><td></td></tr>
            </table>
-           @see #colorfieldview_color
            @see #colorfieldview_cursorid
            @see #colorfieldview_cursorsize
          */
         public static final int[] colorfieldview = {
-            0x7f010000, 0x7f010001, 0x7f010002
+            0x7f010000, 0x7f010001
         };
         /**
-          <p>This symbol is the offset where the {@link com.boltcave.artefactory.R.attr#color}
-          attribute's value can be found in the {@link #colorfieldview} array.
-
-
-          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name com.boltcave.artefactory:color
-        */
-        public static final int colorfieldview_color = 0;
-        /**
-          <p>This symbol is the offset where the {@link com.boltcave.artefactory.R.attr#cursorid}
-          attribute's value can be found in the {@link #colorfieldview} array.
+          <p>
+          @attr description
+           <attr name="color" format="color"/> 
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
           @attr name com.boltcave.artefactory:cursorid
         */
-        public static final int colorfieldview_cursorid = 1;
+        public static final int colorfieldview_cursorid = 0;
         /**
           <p>This symbol is the offset where the {@link com.boltcave.artefactory.R.attr#cursorsize}
           attribute's value can be found in the {@link #colorfieldview} array.
@@ -122,6 +184,6 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.boltcave.artefactory:cursorsize
         */
-        public static final int colorfieldview_cursorsize = 2;
+        public static final int colorfieldview_cursorsize = 1;
     };
 }

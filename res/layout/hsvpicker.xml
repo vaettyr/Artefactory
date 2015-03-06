@@ -3,14 +3,27 @@
     xmlns:boltcave="http://schemas.android.com/apk/res/com.boltcave.artefactory"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
 
     <com.boltcave.artefactory.Views.ColorFieldView
         android:id="@+id/colorFieldView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" 
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:padding="20dp"
         boltcave:cursorid="@drawable/som_gnome"
-        boltcave:cursorsize="50"
-        boltcave:color="#FF08A46B"/>
+        boltcave:cursorsize="50" />
+	
+	<com.boltcave.artefactory.Views.AxisSlider
+	    android:id="@+id/axisSlider1"
+	    android:layout_width="50dp"
+	    android:layout_height="match_parent"
+	    android:layout_margin="10dp"
+	    android:layout_weight="1"
+	    boltcave:axisstyle="hue"
+	    boltcave:cursorid="@drawable/som_gnome"
+	    boltcave:cursorsize="50"
+	    boltcave:orientation="vertical" />
 
 </LinearLayout>

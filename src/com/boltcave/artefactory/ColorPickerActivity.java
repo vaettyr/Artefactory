@@ -57,7 +57,10 @@ public class ColorPickerActivity extends Activity
 			@Override
 			public void onClick(View v) {
 				Intent finalColor = new Intent();
-				//finalColor.set
+				finalColor.putExtra("mode", mode);
+				finalColor.putExtra("color", tcolor);
+				setResult(RESULT_OK, finalColor);
+				finish();
 			}       	
         });
 	}

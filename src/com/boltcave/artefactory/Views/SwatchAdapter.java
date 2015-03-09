@@ -13,6 +13,7 @@ public class SwatchAdapter extends BaseAdapter {
 
     public SwatchAdapter(Context c) {
         mContext = c;
+		mColors = new int[0];
     }
 
     public int getCount() {
@@ -53,9 +54,23 @@ public class SwatchAdapter extends BaseAdapter {
     }
 
     // references to our images
-    private Integer[] mColors = {
-		Color.BLACK, Color.WHITE,
-		Color.RED, Color.BLUE,
-		Color.YELLOW, Color.GREEN
-    };
+    private int[] mColors;
+	
+	public int[] getColors(){
+		return mColors;
+	}
+	
+	public void setColors(int[] colors){
+		mColors = colors;
+	}
+	
+	public void addColor(int color){
+		int[] tcolors = new int[mColors.length + 1];
+		for(int i = 0; i < mColors.length; i++){
+			tcolors[i] = mColors[i];
+		}
+		tcolors[mColors.length] = color;
+		mColors = tcolors;
+		notifyDataSetChanged();
+	}
 }

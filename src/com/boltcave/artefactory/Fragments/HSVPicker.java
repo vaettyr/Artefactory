@@ -1,5 +1,6 @@
 package com.boltcave.artefactory.Fragments;
 
+import com.boltcave.artefactory.ColorPickerActivity;
 import com.boltcave.artefactory.OnColorChangeListener;
 import com.boltcave.artefactory.R;
 import com.boltcave.artefactory.Views.*;
@@ -17,6 +18,8 @@ public class HSVPicker extends Fragment
 	private ColorFieldView swatch;
 	private AxisSlider hueslider;
 	
+	private int startColor;
+	
 	private volatile float hue, saturation, value;
 
 	private OnColorChangeListener callback;
@@ -28,6 +31,7 @@ public class HSVPicker extends Fragment
 		
 		swatch = (ColorFieldView)v.findViewById(R.id.colorFieldView1);
 		swatch.setZOrderOnTop(true);
+		swatch.setColor(startColor);
 		//set base color and so forth
 		swatch.setOnColorFieldChangeListener(new OnColorFieldChangeListener(){
 			@Override
@@ -40,6 +44,7 @@ public class HSVPicker extends Fragment
 		
 		hueslider = (AxisSlider)v.findViewById(R.id.axisSlider1);
 		hueslider.setZOrderOnTop(true);
+		hueslider.setColor(startColor);
 		hueslider.SetOnAxisSliderChangeListener(new OnAxisSliderChangeListener(){
 			@Override
 			public void onAxisSliderChanged(float val) {
@@ -57,6 +62,12 @@ public class HSVPicker extends Fragment
 	{
 		super.onAttach(activity);
 		callback = (OnColorChangeListener)activity;
+		startColor = ((ColorPickerActivity)activity).getStartColor();
+		float[] hsv = new float[3];
+		Color.colorToHSV(startColor, hsv);
+		hue = hsv[0];
+		saturation = hsv[1];
+		value = hsv[2];
 	}
 	
 	@Override

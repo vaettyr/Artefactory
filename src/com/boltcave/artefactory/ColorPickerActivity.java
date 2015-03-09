@@ -22,6 +22,7 @@ public class ColorPickerActivity extends Activity
 	ColorDrawable tcolordraw;
 	
 	int mode;
+	int pos;
 	
 	public static final int EDITMODE = 0;
 	public static final int APPENDMODE = 1;
@@ -34,10 +35,12 @@ public class ColorPickerActivity extends Activity
         if (savedInstanceState != null) {
 	        mode = savedInstanceState.getInt("mode", APPENDMODE);
 	        mcolor = savedInstanceState.getInt("color", Color.WHITE);
+	        pos = savedInstanceState.getInt("position", 0);
         } else {
         	Intent cpIntent = getIntent();
         	mode = cpIntent.getIntExtra("mode", APPENDMODE);
         	mcolor = cpIntent.getIntExtra("color", Color.WHITE);
+        	pos = cpIntent.getIntExtra("position", 0);
         }
         tcolor = mcolor;	       
         setContentView(R.layout.colorpicker);
@@ -59,15 +62,29 @@ public class ColorPickerActivity extends Activity
 				Intent finalColor = new Intent();
 				finalColor.putExtra("mode", mode);
 				finalColor.putExtra("color", tcolor);
+				finalColor.putExtra("position", pos);
 				setResult(RESULT_OK, finalColor);
 				finish();
 			}       	
         });
+        
+        startColor.setOnClickListener(new OnClickListener() {
+        	@Override
+			public void onClick(View v) {
+        		setResult(RESULT_CANCELED);
+        		finish();
+        	}
+        });
 	}
-
 
 	@Override
 	public void OnColorChanged(int color) {
-		tcolordraw.setColor(color);		
+		tcolor = color;
+		tcolordraw.setColor(tcolor);		
+	}
+
+	public int getStartColor()
+	{
+		return mcolor;
 	}
 }

@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.*;
 import android.view.*;
 import android.widget.*;
+
 import java.security.*;
 
 public class ColorPalette extends Fragment
@@ -41,18 +42,28 @@ public class ColorPalette extends Fragment
 		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	        	int selection = (int)parent.getItemAtPosition(position);
-	        	//this needs to change to a non-color int
-				//if(selection != -1){
 				if(position != parent.getCount()-1){
 	        		colorChangeListener.onColorSelected(selection);
 	        	} else {
 	        		Intent colorIntent = new Intent(v.getContext(), ColorPickerActivity.class);
 	        		colorIntent.putExtra("mode", ColorPickerActivity.APPENDMODE);
-	        		colorIntent.putExtra("color", Color.BLACK);
+	        		colorIntent.putExtra("color", Color.WHITE);
 					startActivityForResult(colorIntent, COLOR_REQUEST);
 	        	}
 	        }
 	    });
+		grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+				int editcolor = (int)adapter.getItem(position);
+				Intent editIntent = new Intent(v.getContext(), ColorPickerActivity.class);
+				editIntent.putExtra("mode", ColorPickerActivity.EDITMODE);
+				editIntent.putExtra("color", editcolor);
+				editIntent.putExtra("position",  position);
+				startActivityForResult(editIntent, COLOR_REQUEST);
+				return true;
+			}			
+		});
 		return v;
 	}
 
@@ -63,11 +74,16 @@ public class ColorPalette extends Fragment
 			if(resultCode == ColorPickerActivity.RESULT_OK)
 			{
 				int mode = data.getIntExtra("mode", ColorPickerActivity.APPENDMODE);
-				int color = data.getIntExtra("color", Color.BLACK);
+				int color = data.getIntExtra("color", Color.WHITE);
+				int position = data.getIntExtra("position", 0);
 				switch(mode)
 				{
 					case ColorPickerActivity.APPENDMODE:
 						adapter.addColor(color);
+						break;
+					case ColorPickerActivity.EDITMODE:
+						adapter.setColor(color, position);
+						colorChangeListener.onColorSelected(color);
 						break;
 				}
 			}

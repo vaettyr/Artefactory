@@ -135,6 +135,17 @@ public class SpriteActivity extends Activity
 		ColorDrawable colorswatch = new ColorDrawable();
         colorswatch.setColor(color);
         palbtn.setImageDrawable(colorswatch);
-		
+        FragmentManager fm = getFragmentManager();
+        Fragment paletteFrag = getFragmentManager().findFragmentById(R.id.colorpalette);
+		if(paletteFrag != null)
+		{
+			if(paletteFrag.isVisible())
+			{
+				fm.beginTransaction()
+		          .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+		          .hide(paletteFrag)
+		          .commit();
+			}
+		}
 	}
 }

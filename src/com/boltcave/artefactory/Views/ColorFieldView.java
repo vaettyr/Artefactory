@@ -109,7 +109,7 @@ public class ColorFieldView extends SurfaceView implements Runnable
 		float[] hsv = new float[3];
 		Color.colorToHSV(currentColor, hsv);
 		cursor_x = hsv[1] * getWidth();
-		cursor_y = hsv[2] * getWidth();
+		cursor_y = (1 - hsv[2]) * getHeight();
 	}
 	
 	@Override

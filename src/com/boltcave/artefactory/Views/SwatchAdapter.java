@@ -64,6 +64,12 @@ public class SwatchAdapter extends BaseAdapter {
 		mColors = colors;
 	}
 	
+	public void setColor(int color, int position)
+	{
+		mColors[position] = color;
+		notifyDataSetChanged();
+	}
+	
 	public void addColor(int color){
 		int[] tcolors = new int[mColors.length + 1];
 		for(int i = 0; i < mColors.length; i++){

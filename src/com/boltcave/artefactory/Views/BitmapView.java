@@ -204,4 +204,12 @@ public class BitmapView extends SurfaceView implements Runnable
 		currentColor = color;
 		tool.handleColorChanged(currentColor);
 	}
+	
+	public void newBitmap(int width, int height)
+	{
+		mbitmap = Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888);
+		mrect = new Rect(0,0,mbitmap.getWidth(),mbitmap.getHeight());
+		requestLayout();
+		invalidate();
+	}
 }

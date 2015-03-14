@@ -106,6 +106,7 @@ public class SpriteActivity extends Activity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
+		bmap.newBitmap(16, 16);
 		return true;
 	}
     

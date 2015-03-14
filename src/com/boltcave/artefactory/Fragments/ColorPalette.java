@@ -41,7 +41,7 @@ public class ColorPalette extends Fragment
 		grid.setAdapter(adapter);
 		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	        	int selection = (int)parent.getItemAtPosition(position);
+	        	int selection = parent.getItemAtPosition(position);
 				if(position != parent.getCount()-1){
 	        		colorChangeListener.onColorSelected(selection);
 	        	} else {
@@ -55,7 +55,7 @@ public class ColorPalette extends Fragment
 		grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-				int editcolor = (int)adapter.getItem(position);
+				int editcolor = adapter.getItem(position);
 				Intent editIntent = new Intent(v.getContext(), ColorPickerActivity.class);
 				editIntent.putExtra("mode", ColorPickerActivity.EDITMODE);
 				editIntent.putExtra("color", editcolor);
@@ -90,8 +90,6 @@ public class ColorPalette extends Fragment
 		}
 	}
 
-	
-	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
@@ -102,8 +100,6 @@ public class ColorPalette extends Fragment
 			adapter.setColors(initColors);
 		}
 	}
-
-	
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState)
